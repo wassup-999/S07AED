@@ -1,25 +1,31 @@
-using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public MyQueue<string> BankQueue = new();
 
-
+    /*
     public float speed = 0;
     public float Maxspeed = 100;
+    */
+    public PriorityQueue<EntityStats> priorityQueue = new((a, b) => a.Speed > b.Speed);
+    
     void Start()
     {
         
     }
     private void Update()
     {
+        /*
         speed = Mathf.PingPong(Time.time * 0.5f , 5); // para que se mueva de un lado a otro y regrese
         transform.position = new Vector3(speed , 0 , 0);
         //speed = Mathf.Lerp(speed, Maxspeed, Time.deltaTime); /// Mover un valor de un minimo y maximo
-        
+        */
     }
-
+    /*
     [Button]
     public void TestMathf()
     {
@@ -35,30 +41,28 @@ public class GameManager : MonoBehaviour
        Mathf.Ceil(6.4f); // retorn valor más alto -> 7
 
     }
-
-
-
+    */
 
 
     [Button]
-    public void AddToQueue(string name)
+    public void AddToQueue(EntityStats entity)
     {
-        BankQueue.Enqueue(name);
+        priorityQueue.Enqueue(entity);
     }
     [Button]
     public void DeQueue()
     {
-        Debug.Log("Pase a ser atendido : " + BankQueue.Dequeue());
+        Debug.Log("Pase a ser atendido : " + priorityQueue.Dequeue());
     }
     [Button]
     public void Peek()
     {
-        Debug.Log("Atendiendo turno : " + BankQueue.Peek());
+        Debug.Log("Atendiendo turno : " + priorityQueue.Peek());
     }
     [Button]
     public void Clear()
     {
-        BankQueue.Clear();
+        priorityQueue.Clear();
     }
     /*
     public MyStack<string> nameStack = new();
