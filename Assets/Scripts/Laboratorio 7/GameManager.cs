@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public float speed = 0;
     public float Maxspeed = 100;
     */
-    public PriorityQueue<EntityStats> priorityQueue = new((a, b) => a.Speed > b.Speed);
-    
+    public PriorityQueue<EntityStats> priorityQueueSpeed = new((a, b) => a.Speed > b.Speed);
+
+    public PriorityQueue<EntityStats> priorityQueueID = new((a, b) => a.Id < b.Id);
+
     void Start()
     {
         
@@ -47,22 +49,22 @@ public class GameManager : MonoBehaviour
     [Button]
     public void AddToQueue(EntityStats entity)
     {
-        priorityQueue.Enqueue(entity);
+        priorityQueueSpeed.Enqueue(entity);
     }
     [Button]
     public void DeQueue()
     {
-        Debug.Log("Pase a ser atendido : " + priorityQueue.Dequeue());
+        Debug.Log("Pase a ser atendido : " + priorityQueueSpeed.Dequeue());
     }
     [Button]
     public void Peek()
     {
-        Debug.Log("Atendiendo turno : " + priorityQueue.Peek());
+        Debug.Log("Atendiendo turno : " + priorityQueueSpeed.Peek());
     }
     [Button]
     public void Clear()
     {
-        priorityQueue.Clear();
+        priorityQueueSpeed.Clear();
     }
     /*
     public MyStack<string> nameStack = new();
