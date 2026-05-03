@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public PriorityQueue<EntityStats> priorityQueueSpeed = new((a, b) => a.Speed > b.Speed);
 
     public PriorityQueue<EntityStats> priorityQueueID = new((a, b) => a.Id < b.Id);
+    public List<GameObject> Entities = new();
 
     void Start()
     {
