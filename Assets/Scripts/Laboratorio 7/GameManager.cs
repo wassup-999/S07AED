@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    /*
     public MyQueue<string> BankQueue = new();
 
-    /*
+    
     public float speed = 0;
     public float Maxspeed = 100;
     */
@@ -15,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     public PriorityQueue<EntityStats> priorityQueueID = new((a, b) => a.Id < b.Id);
    
-
     void Start()
     {
         
@@ -46,6 +46,27 @@ public class GameManager : MonoBehaviour
     }
     */
 
+    [Button]
+    public void AddToQueueID(EntityStats entity)
+    {
+        priorityQueueID.Enqueue(entity);
+    }
+    [Button]
+    public void DeQueueID()
+    {
+        Debug.Log("Pase a ser atendido :" + priorityQueueID.Dequeue());
+    }
+    [Button]
+    public void PeekID()
+    {
+        Debug.Log("Entidad con Menor ID :" + priorityQueueID.Peek());
+    }
+    [Button]
+    public void ClearID()
+    {
+        priorityQueueID.Clear();
+    }
+
 
     [Button]
     public void AddToQueue(EntityStats entity)
@@ -53,17 +74,17 @@ public class GameManager : MonoBehaviour
         priorityQueueSpeed.Enqueue(entity);
     }
     [Button]
-    public void DeQueue()
+    public void DeQueueSpeed()
     {
         Debug.Log("Pase a ser atendido : " + priorityQueueSpeed.Dequeue());
     }
     [Button]
-    public void Peek()
+    public void PeekSpeed()
     {
-        Debug.Log("Atendiendo turno : " + priorityQueueSpeed.Peek());
+        Debug.Log("Entidad con Mayor Velocidad : " + priorityQueueSpeed.Peek());
     }
     [Button]
-    public void Clear()
+    public void ClearSpeed()
     {
         priorityQueueSpeed.Clear();
     }
