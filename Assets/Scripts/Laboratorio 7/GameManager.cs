@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,15 +13,18 @@ public class GameManager : MonoBehaviour
     public float speed = 0;
     public float Maxspeed = 100;
     */
-    public PriorityQueue<EntityStats> priorityQueueSpeed = new((a, b) => a.Speed > b.Speed);
+    public PriorityQueue<EntityStats> priorityQueueSpeed; //= new((a, b) => a.Speed > b.Speed);
 
-    public PriorityQueue<EntityStats> priorityQueueID = new((a, b) => a.Id < b.Id);
+    public PriorityQueue<EntityStats> priorityQueueID; //= new((a, b) => a.Id < b.Id);
+
+    public TextMeshProUGUI TextPriority;
    
     void Start()
     {
+        TextPriority.text = "Set Priority";
         
     }
-    private void Update()
+    void Update()
     {
         /*
         speed = Mathf.PingPong(Time.time * 0.5f , 5); // para que se mueva de un lado a otro y regrese
@@ -45,6 +49,17 @@ public class GameManager : MonoBehaviour
 
     }
     */
+    public void ChangePrioritySpeed()
+    {
+        TextPriority.text = "Current Priority : " + "Speed";
+        priorityQueueSpeed = new((a, b) => a.Speed > b.Speed);
+
+    }
+    public void ChangePriotityID()
+    {
+        TextPriority.text = "Current Priority : " + "ID";
+        priorityQueueID = new((a, b) => a.Id < b.Id);
+    }
 
     [Button]
     public void AddToQueueID(EntityStats entity)
@@ -69,7 +84,7 @@ public class GameManager : MonoBehaviour
 
 
     [Button]
-    public void AddToQueue(EntityStats entity)
+    public void AddToQueueSpeed(EntityStats entity)
     {
         priorityQueueSpeed.Enqueue(entity);
     }
