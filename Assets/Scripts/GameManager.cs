@@ -3,6 +3,10 @@ using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    public MusicDataBase musicDataBase;
+
     public MyQueue<string> BankQueue = new();
 
     public float speed = 0;
@@ -11,6 +15,19 @@ public class GameManager : MonoBehaviour
 
     public PriorityQueue<EntityStats> priorityQueue =
         new(  (a,b) => a.speed < b.speed  );
+
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         
